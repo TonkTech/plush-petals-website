@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assortment Preview - Plush Petals</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .preview-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--background-light);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+        
+        .preview-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .preview-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        
+        .close-preview {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .close-preview:hover {
+            background: var(--secondary-color);
+        }
+        
+        .preview-image {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
+            font-size: 4rem;
+            color: white;
+            padding: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .preview-description {
+            margin: 2rem 0;
+            line-height: 1.8;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        .preview-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .preview-actions .place-order-btn {
+            flex: 1;
+        }
+        
+        .preview-actions .back-btn {
+            flex: 1;
+            background: var(--accent-color);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+        }
+        
+        .preview-actions .back-btn:hover {
+            background: var(--text-light);
+            color: white;
+        }
+        
+        #preview-photo {
+            width: calc(100% - 10px) !important;
+            height: calc(100% - 10px) !important;
+            max-width: 600px !important;
+            max-height: 400px !important;
+            object-fit: contain !important;
+            border-radius: 8px !important;
+            margin: 5px !important;
+            display: block !important;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="preview-container" class="preview-container">
+        <div class="preview-content">
+            <div class="preview-header">
+                <h1 id="preview-title" class="preview-title">Assortment #1</h1>
+                <button class="close-preview" onclick="closePreview()">Back to Collection</button>
+            </div>
+            
+            <div class="preview-image">
+                <img id="preview-photo" src="PHOTO-2026-05-11-17-25-13 3.jpg" alt="Assortment #4" class="product-photo">
+            </div>
+            
+            <div id="preview-description" class="preview-description">
+                <p>This elegant assortment features premium artificial flowers crafted with the finest velvet and plush materials. Each piece is carefully designed to bring lasting beauty to any space.</p>
+                <p>Perfect for home decor, special occasions, or as a thoughtful gift that will never fade. Our artificial flowers combine the luxurious look of real blooms with the durability of premium materials.</p>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>High-quality velvet construction</li>
+                    <li>Lifelike appearance and texture</li>
+                    <li>Long-lasting beauty without maintenance</li>
+                    <li>Perfect for indoor display</li>
+                    <li>Available in various sizes and arrangements</li>
+                </ul>
+                <p><strong>Ideal for:</strong></p>
+                <ul>
+                    <li>Home decoration</li>
+                    <li>Office spaces</li>
+                    <li>Special events and celebrations</li>
+                    <li>Gift giving</li>
+                </ul>
+            </div>
+            
+            <div class="preview-actions">
+                <button id="preview-order-btn" class="place-order-btn" onclick="placeOrderFromPreview()">Place an Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function closePreview() {
+            window.location.href = 'index.html#products';
+        }
+        
+        function placeOrderFromPreview() {
+            const product = document.getElementById('preview-title').textContent;
+            window.location.href = 'index.html#contact';
+            
+            // Pre-fill the contact form with product information
+            setTimeout(() => {
+                const messageTextarea = document.querySelector('textarea[name="message"]');
+                if (messageTextarea) {
+                    messageTextarea.value = `I would like to place an order for: ${product}\n\nPlease let me know more about availability and ordering details.`;
+                }
+            }, 100);
+        }
+        
+        // Get assortment number from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const assortmentId = urlParams.get('assortment') || '1';
+        
+        // Update preview content based on assortment
+        const assortmentData = {
+            '1': { title: 'Assortment #1', image: 'PHOTO-2026-05-11-17-25-12 2.jpg', description: 'This elegant assortment features premium artificial flowers crafted with the finest velvet and plush materials.' },
+            '2': { title: 'Assortment #2', image: 'PHOTO-2026-05-11-17-25-12.jpg', description: 'A delicate collection featuring soft pastel blooms with exceptional attention to detail.' },
+            '3': { title: 'Assortment #3', image: 'PHOTO-2026-05-11-17-25-13 2.jpg', description: 'Fresh and vibrant arrangements that bring natural beauty to any setting.' },
+            '4': { title: 'Assortment #4', image: 'PHOTO-2026-05-11-17-25-13 3.jpg', description: 'Luxurious gift-ready bouquets perfect for special occasions and celebrations.' },
+            '5': { title: 'Assortment #5', image: 'PHOTO-2026-05-11-17-25-13.jpg', description: 'Classic beauty reimagined with modern velvet materials and timeless appeal.' },
+            '6': { title: 'Assortment #6', image: 'PHOTO-2026-05-11-17-25-13 4.jpg', description: 'Sophisticated arrangements that showcase exceptional craftsmanship and style.' }
+        };
+        
+        const data = assortmentData[assortmentId];
+        if (data) {
+            document.getElementById('preview-title').textContent = data.title;
+            
+            // Update image
+            const previewPhoto = document.getElementById('preview-photo');
+            if (previewPhoto && data.image) {
+                previewPhoto.src = data.image;
+                previewPhoto.alt = data.title;
+            }
+            
+            // Update icon (remove if we have an image)
+            const previewIcon = document.getElementById('preview-icon');
+            if (previewIcon) {
+                if (data.image) {
+                    previewIcon.style.display = 'none';
+                } else {
+                    previewIcon.className = `fas ${data.icon}`;
+                }
+            }
+            
+            document.getElementById('preview-description').innerHTML = `
+                <p>${data.description}</p>
+                <p>Perfect for home decor, special occasions, or as a thoughtful gift that will never fade. Our artificial flowers combine the luxurious look of real blooms with the durability of premium materials.</p>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>High-quality velvet construction</li>
+                    <li>Lifelike appearance and texture</li>
+                    <li>Long-lasting beauty without maintenance</li>
+                    <li>Perfect for indoor display</li>
+                    <li>Available in various sizes and arrangements</li>
+                </ul>
+                <p><strong>Ideal for:</strong></p>
+                <ul>
+                    <li>Home decoration</li>
+                    <li>Office spaces</li>
+                    <li>Special events and celebrations</li>
+                    <li>Gift giving</li>
+                </ul>
+            `;
+            document.getElementById('preview-order-btn').setAttribute('data-product', data.title);
+        }
+        
+        // Show preview container
+        document.getElementById('preview-container').style.display = 'block';
+    </script>
+</body>
+</html>

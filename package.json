@@ -1,0 +1,22 @@
+{
+  "name": "plush-petals-website",
+  "version": "1.0.0",
+  "description": "Luxury artificial flowers website for Plush Petals",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "build": "echo 'Build complete - static files ready for deployment'",
+    "deploy": "netlify deploy --prod --dir=."
+  },
+  "keywords": [
+    "artificial flowers",
+    "plush petals",
+    "luxury flowers",
+    "velvet flowers",
+    "qatar"
+  ],
+  "author": "Plush Petals",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
