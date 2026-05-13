@@ -81,12 +81,6 @@ windsurf-project-2/
    ```
 4. Open http://localhost:8000 in your browser
 
-## 📞 Contact Information
-
-- **Instagram**: @plushpetals.qa
-- **WhatsApp**: +974 1234 5678
-- **Email**: pamu.niss@gmail.com
-
 ## 🎨 Design Elements
 
 - **Color Palette**: Soft pastels (pink, lavender, mint)
@@ -94,10 +88,3 @@ windsurf-project-2/
 - **Animations**: Smooth transitions and hover effects
 - **Layout**: Responsive grid system
 
-## 📄 License
-
-MIT License - Feel free to use this project for personal or commercial purposes.
-
----
-
-*Crafted with ❤️ for Plush Petals*
